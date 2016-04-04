@@ -14,8 +14,8 @@ function MainLoop() {
         totalTicks++;
         ticks++;
 
-        graphics.draw();
         ai.doActions();
+        graphics.draw();
 
         calcTicksPerSecond();
     } catch (e) {

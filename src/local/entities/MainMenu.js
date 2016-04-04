@@ -18,6 +18,14 @@ function MainMenu() {
         [100, 265, 155, 50, "Score Blitz", document.getElementById("buttonred")],
         [65, 365, 230, 50, "Move Champion", document.getElementById("buttonyellow")]
     ];
+    
+    this.doActions = () => {
+        if (mouseClicked) {
+            this.handleClick();
+        }
+        
+        this.handleMouseMove();
+    }
 
     this.draw = () => {
         ctx.drawImage(this.image, 0, 0, 360, 640)
@@ -45,10 +53,10 @@ function MainMenu() {
         ctx.fillText("Top Move: " + topMove.toString(), 5, 625);
     };
 
-    this.handleClick = (event) => {
+    this.handleClick = () => {
         if (this.active) {
             for (var i = 0; i < gameModes.length; i++) {
-                if (this.isInside(event.offsetX, event.offsetY, i)) {
+                if (this.isInside(mouseX, mouseY, i)) {
                     this.initializeGame(i);
                     return;
                 }
@@ -56,10 +64,10 @@ function MainMenu() {
         }
     };
     
-    this.handleMouseMove = (event) => {
+    this.handleMouseMove = () => {
         if (this.active) {
-            this.lastX = event.offsetX;
-            this.lastY = event.offsetY;
+            this.lastX = mouseX;
+            this.lastY = mouseY;
         }
     };
     
@@ -83,8 +91,6 @@ function MainMenu() {
     
     if (gameOver !== null) { gameOver = null; }
 
-    canvas.addEventListener("click", this.handleClick);
-    canvas.addEventListener("mousemove", this.handleMouseMove);
-    
     graphics.addObject(this);
+    ai.addObject(this);
 }

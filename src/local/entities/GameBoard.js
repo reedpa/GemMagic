@@ -7,8 +7,8 @@ var boardTop = 280;
 var squareWidth = 360 / 6;
 var squareHeight = 360 / 6;
 
-var mouseX = 0;
-var mouseY = 0;
+var boardMouseX = 0;
+var boardMouseY = 0;
 
 var stateLength = 20;
 var nextId = 0;
@@ -63,6 +63,16 @@ function GameBoard(style) {
     };
     
     this.doActions = () => {
+        if (mouseCameDown) {
+            this.grabPiece();
+        }
+
+        if (mouseCameUp) {
+            this.dropPiece();
+        }
+
+        this.highLightSquare();
+        
         this.handleTimer();
         this.handleGameTime();
         if (this.stateCountdown > 1) {
@@ -152,12 +162,12 @@ function GameBoard(style) {
         }
     }
     
-    this.highLightSquare = (event) => {
-        mouseX = event.offsetX;
-        mouseY = Math.max(event.offsetY, boardTop);
-        if ((mouseX % squareWidth) > 10 && ((mouseY - boardTop) % squareHeight > 10)) {
-            var newX = Math.floor(mouseX / squareWidth);
-            var newY = Math.floor((mouseY - boardTop) / squareHeight);
+    this.highLightSquare = () => {
+        boardMouseX = mouseX;
+        boardMouseY = Math.max(mouseY, boardTop);
+        if ((boardMouseX % squareWidth) > 10 && ((boardMouseY - boardTop) % squareHeight > 10)) {
+            var newX = Math.floor(boardMouseX / squareWidth);
+            var newY = Math.floor((boardMouseY - boardTop) / squareHeight);
             if (newX !== this.highlitX || newY !== this.highlitY) {
                 if (this.grabbedPiece && this.grabbedPiece.grabbed) {
                     var tempTop = this.grabbedPiece.top;
@@ -187,8 +197,8 @@ function GameBoard(style) {
         }
     }
 
-    this.grabPiece = (event) => {
-        if (event.offsetX > 340 && event.offsetY < 22) {
+    this.grabPiece = () => {
+        if (mouseX > 340 && mouseY < 22) {
             this.endGame();
         } else if (this.state === "playing") {
             this.grabbedPiece = this.getPiece(this.highlitY, this.highlitX);
@@ -202,7 +212,7 @@ function GameBoard(style) {
         }
     };
 
-    this.dropPiece = (event) => {
+    this.dropPiece = () => {
         if (this.grabbedPiece && this.grabbedPiece.grabbed) {
             this.ungrabPiece();
             this.solveBoard();
@@ -220,7 +230,7 @@ function GameBoard(style) {
     this.endGame = () => {
         this.state = "Game Over";
         this.ungrabPiece();
-        this.removeEventListeners();
+
         var now = Date.now();
         if ( (now - gameStart) > topZen && gameStyle === "Zen") {
             topZen = now - gameStart;
@@ -337,20 +347,5 @@ function GameBoard(style) {
         gameTime = 60000;
         this.gameTimer = new GameTimer();
     }
-    
-    this.removeEventListeners = () => {
-        canvas.removeEventListener("mousemove", this.highLightSquare);
-        canvas.removeEventListener("mousedown", this.grabPiece);
-        canvas.removeEventListener("mouseup", this.dropPiece);
-        canvas.removeEventListener("mouseout", this.dropPiece);
-    }
-    
-    this.addEventListeners = () => {
-        canvas.addEventListener("mousemove", this.highLightSquare);
-        canvas.addEventListener("mousedown", this.grabPiece);
-        canvas.addEventListener("mouseup", this.dropPiece);
-        canvas.addEventListener("mouseout", this.dropPiece);
-    }
 
-    this.addEventListeners();
 }

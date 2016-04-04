@@ -2,6 +2,12 @@ function AI() {
     this.aiObjects = [];
     
     this.doActions = () => {
+        this.aiObjects.sort((left, right) => {
+            if (!left.order) { left.order = 1;}
+            if (!right.order) { right.order = 1;}
+            return left.order - right.order;
+        });
+
         for (var i = 0; i < this.aiObjects.length; i++) {
             this.aiObjects[i].doActions();
         }

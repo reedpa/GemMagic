@@ -42,8 +42,8 @@ function GamePiece() {
     this.getPixelLeft = () => {
         var exactLeft = (this.left * squareWidth);
         if (this.grabbed) {
-            this.oldPixelLeft = mouseX - 20;
-            return mouseX - 20;
+            this.oldPixelLeft = boardMouseX - 20;
+            return boardMouseX - 20;
         } else if (this.oldPixelLeft !== -1 && this.oldPixelLeft !== exactLeft) {
             this.animating = true;
             if (this.oldPixelLeft > exactLeft) {
@@ -62,8 +62,8 @@ function GamePiece() {
     this.getPixelTop = () => {
         var exactTop = (this.top * squareHeight) + boardTop;
         if (this.grabbed) {
-            this.oldPixelTop = mouseY - 20;
-            return mouseY - 20;
+            this.oldPixelTop = boardMouseY - 20;
+            return boardMouseY - 20;
         } else if (this.oldPixelTop !== -1 && this.oldPixelTop !== exactTop) {
             this.animating = true;
             if (this.oldPixelTop > exactTop) {

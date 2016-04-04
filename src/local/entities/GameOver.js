@@ -5,6 +5,12 @@ function GameOver() {
     
     this.button = document.getElementById("buttonwhite");
     
+    this.doActions = () => {
+        if (mouseClicked) {
+            this.loadMainMenu();
+        }
+    }
+    
     this.draw = () => {
         ctx.fillStyle = "black";
         ctx.globalAlpha = 0.2;
@@ -21,8 +27,8 @@ function GameOver() {
         ctx.fillText("Main Menu", 120, 245);
     }
     
-    this.loadMainMenu = (event) => {
-        if (event.offsetX > 110 && event.offsetX < 235 && event.offsetY > 220 && event.offsetY < 270) {
+    this.loadMainMenu = () => {
+        if (mouseX > 110 && mouseX < 235 && mouseY > 220 && mouseY < 270) {
             graphics.graphicsObjects = null;
             ai.aiObjects = null;
             graphics = null;
@@ -31,11 +37,12 @@ function GameOver() {
             mainMenu = null;
             graphics = new Graphics();
             ai = new AI();
+            interaction = new Interaction();
             mainMenu = new MainMenu();
             canvas.removeEventListener("click", this.loadMainMenu);
         }
     }
     
     graphics.addObject(this);
-    canvas.addEventListener("click", this.loadMainMenu);
+    ai.addObject(this);
 }
