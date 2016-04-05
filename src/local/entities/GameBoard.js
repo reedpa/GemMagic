@@ -63,6 +63,8 @@ function GameBoard(style) {
     };
     
     this.doActions = () => {
+        this.highLightSquare();
+
         if (mouseCameDown) {
             this.grabPiece();
         }
@@ -70,8 +72,6 @@ function GameBoard(style) {
         if (mouseCameUp) {
             this.dropPiece();
         }
-
-        this.highLightSquare();
         
         this.handleTimer();
         this.handleGameTime();

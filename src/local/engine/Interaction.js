@@ -35,6 +35,8 @@ function Interaction() {
     }
     
     this.handleMouseDown = () => {
+        mouseX = event.offsetX;
+        mouseY = event.offsetY;
         mouseCameDown = true;
         mouseIsDown = true;
     }
@@ -43,10 +45,33 @@ function Interaction() {
         mouseClicked = true;
     }
     
+    this.handleTouchStart = () => {
+        mouseX = event.touches[0].clientX;
+        mouseY = event.touches[0].clientY;
+        mouseCameDown = true;
+        mouseIsDown = true;
+    }
+    
+    this.handleTouchMove = () => {
+        mouseX = event.touches[0].clientX;
+        mouseY = event.touches[0].clientY;
+    }
+    
+    this.handleTouchEnd = () => {
+        mouseX = -1;
+        mouseY = -1;
+        mouseCameUp = true;
+        mouseIsDown = false;
+    }
+    
     canvas.addEventListener("mousemove", this.handleMouseMove);
     canvas.addEventListener("mousedown", this.handleMouseDown);
     canvas.addEventListener("mouseup", this.handleMouseUp);
     canvas.addEventListener("click", this.handleClick);
+    
+    canvas.addEventListener("touchstart", this.handleTouchStart);
+    canvas.addEventListener("touchmove", this.handleTouchMove);
+    canvas.addEventListener("touchend", this.handleTouchEnd);
     
     ai.addObject(this);
 }
