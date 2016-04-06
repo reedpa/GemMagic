@@ -34,7 +34,7 @@ function Interaction() {
         mouseCameUp = true;
     }
     
-    this.handleMouseDown = () => {
+    this.handleMouseDown = (event) => {
         mouseX = event.offsetX / scaleFactor;
         mouseY = event.offsetY / scaleFactor;
         mouseCameDown = true;
