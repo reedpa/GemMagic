@@ -3,9 +3,9 @@ function GameTimer() {
     this.zindex = 5;
     
     this.draw = () => {
-        ctx.font = "30px Consolas";
-        ctx.fillStyle = "blue";
-        ctx.fillText(ConvertMillisecondsToSecondString(gameTime), 280, 250);
+        graphics.setFont(30, "Consolas");
+        graphics.setFillStyle("blue");
+        graphics.fillText(ConvertMillisecondsToSecondString(gameTime), 280, 250);
     }
 
     graphics.addObject(this);

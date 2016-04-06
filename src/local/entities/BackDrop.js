@@ -21,12 +21,12 @@ function BackDrop() {
     }
     
     this.draw = () => {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.drawImage(this.image, 0, 0);
+        graphics.setFillStyle("#FFFFFF");
+        graphics.drawImage(this.image, 0, 0);
         
-        ctx.font = "25px Arial";
-        ctx.fillStyle = "#000000";
-        ctx.fillText("X", 340, 22);
+        graphics.setFont(25, "Arial");
+        graphics.setFillStyle("#000000");
+        graphics.fillText("X", 340, 22);
     };
     
     graphics.addObject(this);

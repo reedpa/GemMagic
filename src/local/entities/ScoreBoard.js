@@ -9,15 +9,15 @@ function ScoreBoard() {
     var currentScoreSpeed = 20;
     
     this.draw = () => {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.font = "20px Arial";
-        ctx.fillText("Best Move", 20, 25);
-        ctx.fillText(bestMove.toString(), 125, 25);
-        ctx.fillText("Score", 20, 50);
-        ctx.fillText(this.getScore(), 125, 50);
+        graphics.setFillStyle("#FFFFFF");
+        graphics.setFont(20, "Arial");
+        graphics.fillText("Best Move", 20, 25);
+        graphics.fillText(bestMove.toString(), 125, 25);
+        graphics.fillText("Score", 20, 50);
+        graphics.fillText(this.getScore(), 125, 50);
 
-        ctx.font = "30px Arial";
-        ctx.fillText(this.getTurnScore(), 25, 250);
+        graphics.setFont(30, "Arial");
+        graphics.fillText(this.getTurnScore(), 25, 250);
     }
     
     this.getScore = () => {
@@ -30,9 +30,9 @@ function ScoreBoard() {
     this.getTurnScore = () => {
         if (this.currentTurnScore < turnScore) {
             this.currentTurnScore += Math.min(currentScoreSpeed, turnScore - this.currentTurnScore);
-            ctx.font = ((this.currentTurnScore % 400) / 10 + 30).toString() + "px Arial";
+            graphics.setFont(((this.currentTurnScore % 400) / 10 + 30), "Arial");
         } else {
-            ctx.font = "30px Arial";
+            graphics.setFont(30, "Arial");
             this.currentTurnScore += Math.max(0 - currentScoreSpeed, turnScore - this.currentTurnScore);
         }
         return this.currentTurnScore.toString();

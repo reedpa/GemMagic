@@ -22,21 +22,20 @@ function GamePiece() {
         if (!this.image) {
             this.image = document.getElementById(this.color);
         }
-        ctx.strokeStyle = this.color;
+        graphics.setStrokeStyle(this.color);
 
         if (this.matched) {
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = "gold";
-            ctx.strokeRect(this.getPixelLeft() + 5, this.getPixelTop() + 5, 50, 50);
+            graphics.setLineWidth(5);
+            graphics.setStrokeStyle("gold");
+            graphics.strokeRect(this.getPixelLeft() + 5, this.getPixelTop() + 5, 50, 50);
         }
-        if (this.grabbed) {
-            ctx.strokeStyle = "gold";
-        } else if (this.hovered) {
+
+        if (this.hovered) {
             offset = 2;
         }
-        ctx.fillStyle = "black";
-        ctx.font = "30px Arial";
-        ctx.drawImage(this.image, this.getPixelLeft() + offset, this.getPixelTop() + offset);
+        graphics.setFillStyle("black");
+        graphics.setFont(30, "Arial");
+        graphics.drawImage(this.image, this.getPixelLeft() + offset, this.getPixelTop() + offset);
     }
 
     this.getPixelLeft = () => {

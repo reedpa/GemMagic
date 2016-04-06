@@ -1,20 +1,22 @@
 var canvas;
 var ctx;
 
-var graphics = new Graphics();
-var ai = new AI();
+var graphics;
+var ai;
 var interaction;
 var mainMenu;
 var gameOver;
 
 function InitializeGame() {
+    ai = new AI();
+    graphics = new Graphics();
+    interaction = new Interaction();
     mainMenu = new MainMenu();
 }
 
 function main() {
     canvas = document.getElementById("mainCanvas");
     ctx = canvas.getContext("2d");
-    interaction = new Interaction();
     InitializeGame();
     MainLoop();
 }

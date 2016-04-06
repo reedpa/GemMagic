@@ -59,7 +59,7 @@ function GameBoard(style) {
 
     this.zindex = 1;
     this.draw = () => {
-        ctx.drawImage(this.image, boardLeft, boardTop);
+        graphics.drawImage(this.image, boardLeft, boardTop);
     };
     
     this.doActions = () => {

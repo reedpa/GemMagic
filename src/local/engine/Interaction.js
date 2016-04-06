@@ -25,8 +25,8 @@ function Interaction() {
     };
     
     this.handleMouseMove = (event) => {
-        mouseX = event.offsetX;
-        mouseY = event.offsetY;
+        mouseX = event.offsetX / scaleFactor;
+        mouseY = event.offsetY / scaleFactor;
     }
     
     this.handleMouseUp = (event) => {
@@ -35,8 +35,8 @@ function Interaction() {
     }
     
     this.handleMouseDown = () => {
-        mouseX = event.offsetX;
-        mouseY = event.offsetY;
+        mouseX = event.offsetX / scaleFactor;
+        mouseY = event.offsetY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
     }
@@ -46,15 +46,15 @@ function Interaction() {
     }
     
     this.handleTouchStart = () => {
-        mouseX = event.touches[0].clientX;
-        mouseY = event.touches[0].clientY;
+        mouseX = event.touches[0].clientX / scaleFactor;
+        mouseY = event.touches[0].clientY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
     }
     
     this.handleTouchMove = () => {
-        mouseX = event.touches[0].clientX;
-        mouseY = event.touches[0].clientY;
+        mouseX = event.touches[0].clientX / scaleFactor;
+        mouseY = event.touches[0].clientY / scaleFactor;
     }
     
     this.handleTouchEnd = () => {

@@ -12,19 +12,19 @@ function GameOver() {
     }
     
     this.draw = () => {
-        ctx.fillStyle = "black";
-        ctx.globalAlpha = 0.2;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 1;
-        ctx.font = "40px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText("GAME", 110, 140);
-        ctx.fillText("OVER", 110, 190);
+        graphics.setFillStyle("black");
+        graphics.setGlobalAlpha(0.2);
+        graphics.fillRect(0, 0, canvas.width, canvas.height);
+        graphics.setGlobalAlpha(1);
+        graphics.setFont(40, "Arial");
+        graphics.setFillStyle("white");
+        graphics.fillText("GAME", 110, 140);
+        graphics.fillText("OVER", 110, 190);
 
-        ctx.drawImage(this.button, 110, 220, 120, 40);
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText("Main Menu", 120, 245);
+        graphics.drawImage(this.button, 110, 220, 120, 40);
+        graphics.setFont(20, "Arial");
+        graphics.setFillStyle("black");
+        graphics.fillText("Main Menu", 120, 245);
     }
     
     this.loadMainMenu = () => {

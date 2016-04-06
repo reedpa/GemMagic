@@ -28,11 +28,11 @@ function MainLoop() {
 }
 
 function writeDebugInfo() {
-    ctx.fillStyle = "#000000";
-    ctx.font = "30px Arial";
-    ctx.fillText(tps.toString(), 320, 30);
-    ctx.fillText(totalTicks.toString(), 30, 60);
-    ctx.fillText(debugMessage, 30, 90);
+    graphics.setFillStyle("#000000");
+    graphics.setFont(30, "Arial");
+    graphics.fillText(tps.toString(), 320, 30);
+    graphics.fillText(totalTicks.toString(), 30, 60);
+    graphics.fillText(debugMessage, 30, 90);
 }
 
 function calcTicksPerSecond() {
