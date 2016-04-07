@@ -27,11 +27,13 @@ function Interaction() {
     this.handleMouseMove = function(event) {
         mouseX = event.offsetX / scaleFactor;
         mouseY = event.offsetY / scaleFactor;
+        event.preventDefault();
     }
     
     this.handleMouseUp = function(event) {
         mouseIsDown = false;
         mouseCameUp = true;
+        event.preventDefault();
     }
     
     this.handleMouseDown = function(event) {
@@ -39,29 +41,34 @@ function Interaction() {
         mouseY = event.offsetY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
+        event.preventDefault();
     }
     
-    this.handleClick = function() {
+    this.handleClick = function(event) {
         mouseClicked = true;
+        event.preventDefault();
     }
     
-    this.handleTouchStart = function() {
+    this.handleTouchStart = function(event) {
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
+        event.preventDefault();
     }
     
-    this.handleTouchMove = function() {
+    this.handleTouchMove = function(event) {
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
+        event.preventDefault();
     }
     
-    this.handleTouchEnd = function() {
+    this.handleTouchEnd = function(event) {
         mouseX = -1;
         mouseY = -1;
         mouseCameUp = true;
         mouseIsDown = false;
+        event.preventDefault();
     }
     
     canvas.addEventListener("mousemove", this.handleMouseMove);

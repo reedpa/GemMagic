@@ -18,8 +18,10 @@ function MainLoop() {
         graphics.draw();
 
         calcTicksPerSecond();
+
     } catch (e) {
         console.log("Exception! " + e.toString());
+        debugMessage = "Exception! " + e.toString();
     }
 
     loopEnd = Date.now();
@@ -29,7 +31,7 @@ function MainLoop() {
 
 function writeDebugInfo() {
     graphics.setFillStyle("#000000");
-    graphics.setFont(30, "Arial");
+    graphics.setFont(20, "Arial");
     graphics.fillText(tps.toString(), 320, 30);
     graphics.fillText(totalTicks.toString(), 30, 60);
     graphics.fillText(debugMessage, 30, 90);

@@ -13,9 +13,9 @@ function MainMenu() {
     this.lastY = 0;
     
     if (window.localStorage) {
-        topScore = window.localStorage.getItem('TopScore');
-        topMove = window.localStorage.getItem('TopMove');
-        topZen = window.localStorage.getItem('TopZen');
+        topScore = window.localStorage.getItem('TopScore') || 0;
+        topMove = window.localStorage.getItem('TopMove') || 0;
+        topZen = window.localStorage.getItem('TopZen') || 0;
     }
 
     var gameModes = [
