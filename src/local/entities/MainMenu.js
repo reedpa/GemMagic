@@ -58,6 +58,7 @@ function MainMenu() {
         if (this.active) {
             for (var i = 0; i < gameModes.length; i++) {
                 if (this.isInside(mouseX, mouseY, i)) {
+                    audio.playSound("buttonclick");
                     this.initializeGame(i);
                     return;
                 }

@@ -29,6 +29,7 @@ function GameOver() {
     
     this.loadMainMenu = () => {
         if (mouseX > 110 && mouseX < 235 && mouseY > 220 && mouseY < 270) {
+            audio.playSound("buttonclick");
             graphics.graphicsObjects = null;
             ai.aiObjects = null;
             graphics = null;

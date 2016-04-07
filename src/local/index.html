@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <script src="engine/AI.js"></script>
+        <script src="engine/Audio.js"></script>
+        <script src="engine/Graphics.js"></script>
+        <script src="engine/Interaction.js"></script>
+        <script src="engine/MainLoop.js"></script>
+        <script src="entities/BackDrop.js"></script>
+        <script src="entities/GameBoard.js"></script>
+        <script src="entities/GamePiece.js"></script>
+        <script src="entities/DropTimer.js"></script>
+        <script src="entities/GameTimer.js"></script>
+        <script src="entities/ScoreBoard.js"></script>
+        <script src="entities/MainMenu.js"></script>
+        <script src="entities/GameOver.js"></script>
+        <script src="utilities/TimeUtil.js"></script>
+    </head>
+    <body>
+        <canvas id="mainCanvas" 
+        style="border: 5px solid black"
+        width="360px"
+        height="640px">
+        </canvas>
+        
+        <div style="display:none">
+            <img id="buttonpurple" src="assets/images/buttonpurple.png"></img>
+            <img id="buttonyellow" src="assets/images/buttonyellow.png"></img>
+            <img id="buttonred" src="assets/images/buttonred.png"></img>
+            <img id="title" src="assets/images/title.png"></img>
+            <img id="mainmenu" src="assets/images/mainmenubg.jpg"></img>
+            <img id="red" src="assets/images/red.png"></img>
+            <img id="pink" src="assets/images/pink.png"></img>
+            <img id="teal" src="assets/images/teal.png"></img>
+            <img id="green" src="assets/images/green.png"></img>
+            <img id="blue" src="assets/images/blue.png"></img>
+            <img id="yellow" src="assets/images/yellow.png"></img>
+            <img id="purple" src="assets/images/purple.png"></img>
+            <img id="buttonwhite" src="assets/images/buttonwhite.png"></img>
+            <img id="board_green" src="assets/images/board_green.jpg"></img>
+            <img id="background_green" src="assets/images/background_green.jpg"></img>
+            <img id="board_red" src="assets/images/board_red.jpg"></img>
+            <img id="background_red" src="assets/images/background_red.jpg"></img>
+            <img id="board_yellow" src="assets/images/board_yellow.jpg"></img>
+            <img id="background_yellow" src="assets/images/background_yellow.jpg"></img>
+            
+            <audio id="piecemove" src="assets/audio/piecemove.mp3"></audio>
+            <audio id="buttonclick" src="assets/audio/buttonclick.mp3"></audio>
+        </div>
+
+        <script src="main.js"></script>
+        
+        <!--
+            Art credits:
+                Buttons: http://hawkadium.blogspot.ca/
+                Gems: http://opengameart.org/content/basic-gems-icon-set-remix
+                Game Board: http://opengameart.org/content/background-texture-for-a-board-game
+                Backgrounds: Deposit photos
+                
+                Piece movement audio: http://opengameart.org/content/zippo-click-sound
+                Button click audio: http://opengameart.org/content/picked-coin-echo
+            -->
+    </body>
+</html>

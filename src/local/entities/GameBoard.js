@@ -178,6 +178,7 @@ function GameBoard(style) {
 
                     tempPiece.top = tempTop;
                     tempPiece.left = tempLeft;
+                    audio.playSound("piecemove");
                 }
             }
             this.highlitX = newX;
