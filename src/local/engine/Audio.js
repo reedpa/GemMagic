@@ -13,4 +13,25 @@ function Audio() {
             sound.play();
         } catch(e) {}
     }
+    
+    this.loopSound = function(soundName) {
+        try {
+            var sound = document.getElementById(soundName);
+            if (!sound.loop) {
+                sound.pause();
+                sound.currentTime = 0;
+                sound.loop = true;
+                sound.play();
+            }
+        } catch(e) {}
+    }
+    
+    this.stopSound = function(soundName) {
+        try {
+            var sound = document.getElementById(soundName);
+            sound.pause();
+            sound.currentTime = 0;
+            sound.loop = false;
+        } catch(e) {}
+    }
 }

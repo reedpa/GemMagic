@@ -10,7 +10,7 @@ var squareHeight = 360 / 6;
 var boardMouseX = 0;
 var boardMouseY = 0;
 
-var stateLength = 20;
+var stateLength = 33;
 var nextId = 0;
 var score = 0;
 var turnScore = 0;
@@ -200,6 +200,7 @@ function GameBoard(style) {
 
     this.grabPiece = function() {
         if (mouseX > 340 && mouseY < 22) {
+            audio.playSound("buttonclick");
             this.endGame();
         } else if (this.state === "playing") {
             this.grabbedPiece = this.getPiece(this.highlitY, this.highlitX);
@@ -285,6 +286,7 @@ function GameBoard(style) {
         if (matched) {
             this.state = "solving";
             this.stateCountdown = stateLength;
+            audio.loopSound("scoretally");
         } else {
             score += turnScore;
             if (bestMove < turnScore) {
@@ -292,6 +294,7 @@ function GameBoard(style) {
             }
             turnScore = 0;
             this.state = "playing";
+            audio.stopSound("scoretally");
         }
     }
     
