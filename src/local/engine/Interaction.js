@@ -17,47 +17,47 @@ function Interaction() {
     mouseCameUp = false;
     mouseCameDown = false;
 
-    this.doActions = () => {
+    this.doActions = function() {
         //other AI objects get one frame to handle these events and then we clear them
         mouseCameUp = false;
         mouseCameDown = false;
         mouseClicked = false;
     };
     
-    this.handleMouseMove = (event) => {
+    this.handleMouseMove = function(event) {
         mouseX = event.offsetX / scaleFactor;
         mouseY = event.offsetY / scaleFactor;
     }
     
-    this.handleMouseUp = (event) => {
+    this.handleMouseUp = function(event) {
         mouseIsDown = false;
         mouseCameUp = true;
     }
     
-    this.handleMouseDown = (event) => {
+    this.handleMouseDown = function(event) {
         mouseX = event.offsetX / scaleFactor;
         mouseY = event.offsetY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
     }
     
-    this.handleClick = () => {
+    this.handleClick = function() {
         mouseClicked = true;
     }
     
-    this.handleTouchStart = () => {
+    this.handleTouchStart = function() {
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
         mouseCameDown = true;
         mouseIsDown = true;
     }
     
-    this.handleTouchMove = () => {
+    this.handleTouchMove = function() {
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
     }
     
-    this.handleTouchEnd = () => {
+    this.handleTouchEnd = function() {
         mouseX = -1;
         mouseY = -1;
         mouseCameUp = true;

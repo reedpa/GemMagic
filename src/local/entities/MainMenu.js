@@ -1,7 +1,6 @@
-var topScore = window.localStorage.getItem('TopScore') || 0;
-var topMove = window.localStorage.getItem('TopMove') || 0;
-var topZen = window.localStorage.getItem('TopZen') || 0;
-
+var topScore = 0;
+var topMove = 0;
+var topZen = 0;
 
 function MainMenu() {
     this.zindex = 1;
@@ -12,6 +11,12 @@ function MainMenu() {
 
     this.lastX = 0;
     this.lastY = 0;
+    
+    if (window.localStorage) {
+        topScore = window.localStorage.getItem('TopScore');
+        topMove = window.localStorage.getItem('TopMove');
+        topZen = window.localStorage.getItem('TopZen');
+    }
 
     var gameModes = [
         [145, 165, 65, 50, "Zen", document.getElementById("buttonpurple")],
@@ -19,7 +24,7 @@ function MainMenu() {
         [65, 365, 230, 50, "Move Champion", document.getElementById("buttonyellow")]
     ];
     
-    this.doActions = () => {
+    this.doActions = function() {
         if (mouseClicked) {
             this.handleClick();
         }
@@ -27,7 +32,7 @@ function MainMenu() {
         this.handleMouseMove();
     }
 
-    this.draw = () => {
+    this.draw = function() {
         graphics.drawImage(this.image, 0, 0, 360, 640)
         graphics.drawImage(this.titleImage, 90, 0);
         graphics.setStrokeStyle("black");
@@ -54,7 +59,7 @@ function MainMenu() {
         graphics.fillText("Top Move: " + topMove.toString(), 5, 625);
     };
 
-    this.handleClick = () => {
+    this.handleClick = function() {
         if (this.active) {
             for (var i = 0; i < gameModes.length; i++) {
                 if (this.isInside(mouseX, mouseY, i)) {
@@ -66,14 +71,14 @@ function MainMenu() {
         }
     };
     
-    this.handleMouseMove = () => {
+    this.handleMouseMove = function() {
         if (this.active) {
             this.lastX = mouseX;
             this.lastY = mouseY;
         }
     };
     
-    this.isInside = (x, y, i) => {
+    this.isInside = function(x, y, i) {
         if (x > gameModes[i][0] && x < (gameModes[i][0] + gameModes[i][2])) {
             if (y > gameModes[i][1] && y < (gameModes[i][1] + gameModes[i][3])) {
                 return true;
@@ -82,7 +87,7 @@ function MainMenu() {
         return false;
     }
 
-    this.initializeGame = (index) => {
+    this.initializeGame = function(index) {
         var gameBoard = new GameBoard(gameModes[index][4]);
         graphics.addObject(gameBoard);
         ai.addObject(gameBoard);

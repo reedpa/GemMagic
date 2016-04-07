@@ -5,13 +5,13 @@ function GameOver() {
     
     this.button = document.getElementById("buttonwhite");
     
-    this.doActions = () => {
+    this.doActions = function() {
         if (mouseClicked) {
             this.loadMainMenu();
         }
     }
     
-    this.draw = () => {
+    this.draw = function() {
         graphics.setFillStyle("black");
         graphics.setGlobalAlpha(0.2);
         graphics.fillRect(0, 0, canvas.width, canvas.height);
@@ -27,7 +27,7 @@ function GameOver() {
         graphics.fillText("Main Menu", 120, 245);
     }
     
-    this.loadMainMenu = () => {
+    this.loadMainMenu = function() {
         if (mouseX > 110 && mouseX < 235 && mouseY > 220 && mouseY < 270) {
             audio.playSound("buttonclick");
             graphics.graphicsObjects = null;

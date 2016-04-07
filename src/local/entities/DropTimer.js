@@ -3,7 +3,7 @@ function DropTimer() {
     
     this.zindex = 5;
     
-    this.draw = () => {
+    this.draw = function() {
         if (dropTime > 0) {
             var sizeMod = Math.floor((5000 - dropTime) / 200);
             var size = sizeMod + 50; 

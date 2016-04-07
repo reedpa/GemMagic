@@ -20,7 +20,7 @@ function BackDrop() {
             this.image = document.getElementById("background_green");
     }
     
-    this.draw = () => {
+    this.draw = function() {
         graphics.setFillStyle("#FFFFFF");
         graphics.drawImage(this.image, 0, 0);
         

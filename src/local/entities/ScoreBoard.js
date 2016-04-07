@@ -8,7 +8,7 @@ function ScoreBoard() {
     var scoreSpeed = 20;
     var currentScoreSpeed = 20;
     
-    this.draw = () => {
+    this.draw = function() {
         graphics.setFillStyle("#FFFFFF");
         graphics.setFont(20, "Arial");
         graphics.fillText("Best Move", 20, 25);
@@ -20,14 +20,14 @@ function ScoreBoard() {
         graphics.fillText(this.getTurnScore(), 25, 250);
     }
     
-    this.getScore = () => {
+    this.getScore = function() {
         if (this.currentScore < score) {
             this.currentScore += Math.min(scoreSpeed, score - this.currentScore);
         }
         return this.currentScore.toString();
     }
     
-    this.getTurnScore = () => {
+    this.getTurnScore = function() {
         if (this.currentTurnScore < turnScore) {
             this.currentTurnScore += Math.min(currentScoreSpeed, turnScore - this.currentTurnScore);
             graphics.setFont(((this.currentTurnScore % 400) / 10 + 30), "Arial");

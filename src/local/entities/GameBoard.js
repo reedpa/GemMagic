@@ -58,11 +58,11 @@ function GameBoard(style) {
     }
 
     this.zindex = 1;
-    this.draw = () => {
+    this.draw = function() {
         graphics.drawImage(this.image, boardLeft, boardTop);
     };
     
-    this.doActions = () => {
+    this.doActions = function() {
         this.highLightSquare();
 
         if (mouseCameDown) {
@@ -93,7 +93,7 @@ function GameBoard(style) {
         }
     }
 
-    this.handleTimer = () => {
+    this.handleTimer = function() {
         if (dropTime > 0) {
             dropTime -= loopStart - loopEnd;
             if (dropTime <= 0) {
@@ -102,7 +102,7 @@ function GameBoard(style) {
         }
     }
     
-    this.handleGameTime = () => {
+    this.handleGameTime = function() {
         if (gameTime > 0 && this.state === "playing") {
             gameTime -= loopStart - loopEnd;
             if (gameTime <= 0) {
@@ -111,7 +111,7 @@ function GameBoard(style) {
         }
     }
 
-    this.clearPieces = () => {
+    this.clearPieces = function() {
         for (var i = 0; i < this.pieces.length; i++) {
             if (this.pieces[i].matched) {
                 graphics.removeObject(this.pieces[i]);
@@ -120,13 +120,13 @@ function GameBoard(style) {
         }
     }
     
-    this.repopulateBoard = () => {
+    this.repopulateBoard = function() {
         for (var i = 0; i < 6; i++) {
             this.repopulateColumn(i);
         }
     }
     
-    this.repopulateColumn = (index) => {
+    this.repopulateColumn = function(index) {
         var neededPieces = 0;
         for (var i = 5; i > -1; i--) {
             var piece = i * 6 + index;
@@ -162,7 +162,7 @@ function GameBoard(style) {
         }
     }
     
-    this.highLightSquare = () => {
+    this.highLightSquare = function() {
         boardMouseX = mouseX;
         boardMouseY = Math.max(mouseY, boardTop);
         if ((boardMouseX % squareWidth) > 10 && ((boardMouseY - boardTop) % squareHeight > 10)) {
@@ -190,7 +190,7 @@ function GameBoard(style) {
         }
     };
 
-    this.getPiece = (top, left) => {
+    this.getPiece = function(top, left) {
         for (var i = 0; i < this.pieces.length; i++) {
             if (this.pieces[i] && this.pieces[i].top === top && this.pieces[i].left === left) {
                 return this.pieces[i];
@@ -198,7 +198,7 @@ function GameBoard(style) {
         }
     }
 
-    this.grabPiece = () => {
+    this.grabPiece = function() {
         if (mouseX > 340 && mouseY < 22) {
             this.endGame();
         } else if (this.state === "playing") {
@@ -213,14 +213,14 @@ function GameBoard(style) {
         }
     };
 
-    this.dropPiece = () => {
+    this.dropPiece = function() {
         if (this.grabbedPiece && this.grabbedPiece.grabbed) {
             this.ungrabPiece();
             this.solveBoard();
         }
     };
     
-    this.ungrabPiece = () => {
+    this.ungrabPiece = function() {
         if (this.grabbedPiece && this.grabbedPiece.grabbed) {
             this.grabbedPiece.grabbed = false;
             this.grabbedPiece.zindex = 2;
@@ -228,35 +228,35 @@ function GameBoard(style) {
         }
     }
     
-    this.endGame = () => {
+    this.endGame = function() {
         this.state = "Game Over";
         this.ungrabPiece();
 
         var now = Date.now();
         if ( (now - gameStart) > topZen && gameStyle === "Zen") {
             topZen = now - gameStart;
-            window.localStorage.setItem('TopZen', topZen);
+            if (window.localStorage) { window.localStorage.setItem('TopZen', topZen); }
         }
         if (score > topScore && gameStyle === "Score Blitz") {
             topScore = score;
-            window.localStorage.setItem('TopScore', topScore);
+            if (window.localStorage) { window.localStorage.setItem('TopScore', topScore); }
         }
         if (bestMove > topMove && gameStyle === "Move Champion") {
             topMove = bestMove;
-            window.localStorage.setItem('TopMove', topMove);
+            if (window.localStorage) { window.localStorage.setItem('TopMove', topMove); }
         }
         gameOver = new GameOver();
     };
     
-    this.unsetMatches = () => {
+    this.unsetMatches = function() {
         for (var i = 0; i < this.pieces.length; i++) {
             this.pieces[i].matched = false;
         }
     }
 
-    this.solveBoard = () => {
+    this.solveBoard = function() {
         var matched = false;
-        this.pieces.sort( (left, right) => {
+        this.pieces.sort( function(left, right) {
             return ((left.top * 6 + left.left) - (right.top * 6 + right.left) );
         });
 
@@ -295,7 +295,7 @@ function GameBoard(style) {
         }
     }
     
-    this.findMatchesDown = (index) => {
+    this.findMatchesDown = function(index) {
         var ret = [index];
         var colorToSearch = this.pieces[index].color;
         index += 6;
@@ -310,7 +310,7 @@ function GameBoard(style) {
         }
     }
     
-    this.findMatchesRight = (index) => {
+    this.findMatchesRight = function(index) {
         var ret = [index];
         var colorToSearch = this.pieces[index].color;
         index += 1;

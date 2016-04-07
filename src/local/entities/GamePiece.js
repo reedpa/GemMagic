@@ -17,7 +17,7 @@ function GamePiece() {
     this.image;
 
     this.zindex = 2;
-    this.draw = () => {
+    this.draw = function() {
         var offset = 0;
         if (!this.image) {
             this.image = document.getElementById(this.color);
@@ -38,7 +38,7 @@ function GamePiece() {
         graphics.drawImage(this.image, this.getPixelLeft() + offset, this.getPixelTop() + offset);
     }
 
-    this.getPixelLeft = () => {
+    this.getPixelLeft = function() {
         var exactLeft = (this.left * squareWidth);
         if (this.grabbed) {
             this.oldPixelLeft = boardMouseX - 20;
@@ -58,7 +58,7 @@ function GamePiece() {
         return exactLeft;
     }
 
-    this.getPixelTop = () => {
+    this.getPixelTop = function() {
         var exactTop = (this.top * squareHeight) + boardTop;
         if (this.grabbed) {
             this.oldPixelTop = boardMouseY - 20;

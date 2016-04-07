@@ -3,11 +3,11 @@ var scaleFactor = 1;
 function Graphics() {
     this.graphicsObjects = [];
 
-    this.draw = () => {
+    this.draw = function() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        this.graphicsObjects.sort((left, right) => {
+        this.graphicsObjects.sort(function(left, right) {
             return left.zindex - right.zindex;
         });
 
@@ -16,11 +16,11 @@ function Graphics() {
         }
     };
     
-    this.addObject = (object) => {
+    this.addObject = function(object) {
         this.graphicsObjects.push(object);
     };
     
-    this.removeObject = (object) => {
+    this.removeObject = function(object) {
         for (var i = 0; i < this.graphicsObjects.length; i++) {
             if (this.graphicsObjects[i].id === object.id) {
                 this.graphicsObjects.splice(i, 1);
@@ -29,45 +29,45 @@ function Graphics() {
         }
     }
 
-    this.drawImage = (image, x, y, width, height) => {
+    this.drawImage = function(image, x, y, width, height) {
         if (!width) { width = image.width; }
         if (!height) { height = image.height; }
         ctx.drawImage(image, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
 
-    this.setFont = (fontSize, font) => {
+    this.setFont = function(fontSize, font) {
         ctx.font = (fontSize * scaleFactor).toString() + "px " + font;
     }
 
-    this.setFillStyle = (fillStyle) => {
+    this.setFillStyle = function(fillStyle) {
         ctx.fillStyle = fillStyle;
     }
 
-    this.setLineWidth = (lineWidth) => {
+    this.setLineWidth = function(lineWidth) {
         ctx.lineWidth = lineWidth * scaleFactor;
     }
 
-    this.setStrokeStyle = (strokeStyle) => {
+    this.setStrokeStyle = function(strokeStyle) {
         ctx.strokeStyle = strokeStyle;
     }
 
-    this.setGlobalAlpha = (globalAlpha) => {
+    this.setGlobalAlpha = function(globalAlpha) {
         ctx.globalAlpha = globalAlpha;
     }
 
-    this.fillText = (text, x, y) => {
+    this.fillText = function(text, x, y) {
         ctx.fillText(text, x * scaleFactor, y * scaleFactor);
     }
 
-    this.strokeRect = (x, y, width, height) => {
+    this.strokeRect = function(x, y, width, height) {
         ctx.strokeRect(x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
 
-    this.fillRect = (x, y, width, height) => {
+    this.fillRect = function(x, y, width, height) {
         ctx.fillRect(x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
 
-    this.calculateScaleFactor = () => {
+    this.calculateScaleFactor = function() {
         var windowHeight = window.innerHeight - 50;
         var myScaleFactor = windowHeight / canvas.height;
         if (myScaleFactor > 1.5) {
