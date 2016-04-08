@@ -34,6 +34,16 @@ function Graphics() {
         if (!height) { height = image.height; }
         ctx.drawImage(image, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
+    
+    this.drawImageRotated = function(image, rotation, x, y, width, height) {
+        if (!width) { width = image.width; }
+        if (!height) { height = image.height; }
+        ctx.translate(x * scaleFactor, y * scaleFactor);
+        ctx.rotate(rotation);
+        this.drawImage(image, 0, 0, width, height);
+        ctx.rotate(-1 * rotation);
+        ctx.translate(-1 * x * scaleFactor, -1 * y * scaleFactor);
+    }
 
     this.setFont = function(fontSize, font) {
         ctx.font = (fontSize * scaleFactor).toString() + "px " + font;

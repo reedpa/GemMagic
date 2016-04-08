@@ -175,6 +175,15 @@ function GameBoard(style) {
                     var tempPiece = this.getPiece(newY, newX);
                     this.grabbedPiece.top = tempPiece.top;
                     this.grabbedPiece.left = tempPiece.left;
+                    
+                    if (Math.abs(newX - this.highlitX) > 1 || Math.abs(newY - this.highlitY) > 1) {
+                        var trickShot = new TrickShotLabel();
+                        trickShot.top = tempPiece.getPixelTop();
+                        trickShot.left = tempPiece.getPixelLeft();
+                        audio.playSound("trickshot_sound");
+                        turnScore += 250;
+                        turnScore = Math.floor(turnScore * 1.1);
+                    }
 
                     tempPiece.top = tempTop;
                     tempPiece.left = tempLeft;
