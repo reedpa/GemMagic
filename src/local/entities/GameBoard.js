@@ -199,7 +199,7 @@ function GameBoard(style) {
     }
 
     this.grabPiece = function() {
-        if (mouseX > 340 && mouseY < 22) {
+        if (mouseX > 330 && mouseY < 30) {
             audio.playSound("buttonclick");
             this.endGame();
         } else if (this.state === "playing") {
@@ -273,6 +273,7 @@ function GameBoard(style) {
                         turnScore += 100;
                         audio.playSound("scoretally");
                     }
+                    turnScore = Math.floor(turnScore * (1 + 0.1 * downMatches.length));
                 }
                 if (rightMatches) {
                     for (var m = 0; m < rightMatches.length; m++) {
@@ -280,6 +281,7 @@ function GameBoard(style) {
                         this.pieces[rightMatches[m]].matched = true;
                         turnScore += 100;
                         audio.playSound("scoretally");
+                        turnScore = Math.floor(turnScore * (1 + 0.1 * rightMatches.length));
                     }
                 }
             }
