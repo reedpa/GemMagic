@@ -6,7 +6,7 @@ function GameOver() {
     this.button = document.getElementById("buttonwhite");
     
     this.doActions = function() {
-        if (mouseClicked) {
+        if (mouseCameDown) {
             this.loadMainMenu();
         }
     }

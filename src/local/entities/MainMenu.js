@@ -25,7 +25,7 @@ function MainMenu() {
     ];
     
     this.doActions = function() {
-        if (mouseClicked) {
+        if (mouseCameDown) {
             this.handleClick();
         }
         
