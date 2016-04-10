@@ -33,16 +33,18 @@ function GameBoard(style) {
     this.id = "the game board";
     this.backDrop = null;
     this.image = null;
-    
+
+    var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
+
     score = 0;
-    
+
     turnScore = 0;
     bestMove = 0;
     dropTime = 0;
     gameTime = 0;
     gameStart = Date.now();
     gameStyle = style;
-    
+
     switch(gameStyle) {
         case "Zen":
             this.image = document.getElementById("board_green");
@@ -61,7 +63,7 @@ function GameBoard(style) {
     this.draw = function() {
         graphics.drawImage(this.image, boardLeft, boardTop);
     };
-    
+
     this.doActions = function() {
         this.highLightSquare();
 
@@ -72,7 +74,7 @@ function GameBoard(style) {
         if (mouseCameUp) {
             this.dropPiece();
         }
-        
+
         this.handleTimer();
         this.handleGameTime();
         if (this.stateCountdown > 1) {
@@ -120,13 +122,13 @@ function GameBoard(style) {
         }
     }
     
-    this.repopulateBoard = function() {
+    this.repopulateBoard = function(dontAnimate) {
         for (var i = 0; i < 6; i++) {
-            this.repopulateColumn(i);
+            this.repopulateColumn(i, dontAnimate);
         }
     }
     
-    this.repopulateColumn = function(index) {
+    this.repopulateColumn = function(index, dontAnimate) {
         var neededPieces = 0;
         for (var i = 5; i > -1; i--) {
             var piece = i * 6 + index;
@@ -156,7 +158,7 @@ function GameBoard(style) {
             newPiece.left = index;
             newPiece.color = colors[Math.floor(Math.random() * colors.length)];
             newPiece.id = nextId.toString();
-            newPiece.oldPixelTop = 640 - ( (6 + neededPieces - i) * squareHeight);
+            if (!dontAnimate) { newPiece.oldPixelTop = 640 - ( (6 + neededPieces - i) * squareHeight); }
             nextId++;
             this.pieces[i * 6 + index] = newPiece;
         }
@@ -265,6 +267,23 @@ function GameBoard(style) {
     }
 
     this.solveBoard = function() {
+        var matched = this.matchPieces();
+
+        if (matched) {
+            audio.playSound("scoretally");
+            this.state = "solving";
+            this.stateCountdown = stateLength;
+        } else {
+            score += turnScore;
+            if (bestMove < turnScore) {
+                bestMove = turnScore;
+            }
+            turnScore = 0;
+            this.state = "playing";
+        }
+    }
+
+    this.matchPieces = function() {
         var matched = false;
         this.pieces.sort( function(left, right) {
             return ((left.top * 6 + left.left) - (right.top * 6 + right.left) );
@@ -293,21 +312,9 @@ function GameBoard(style) {
                 }
             }
         }
-        
-        if (matched) {
-            audio.playSound("scoretally");
-            this.state = "solving";
-            this.stateCountdown = stateLength;
-        } else {
-            score += turnScore;
-            if (bestMove < turnScore) {
-                bestMove = turnScore;
-            }
-            turnScore = 0;
-            this.state = "playing";
-        }
+        return matched;
     }
-    
+
     this.findMatchesDown = function(index) {
         var ret = [index];
         var colorToSearch = this.pieces[index].color;
@@ -337,23 +344,33 @@ function GameBoard(style) {
             return null;
         }
     }
-
-    var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
-
-    for (var i = 0; i < 36; i++) {
-        var newPiece = new GamePiece();
-        newPiece.top = Math.floor(i / 6);
-        newPiece.left = (i % 6);
-        newPiece.color = colors[Math.floor(Math.random() * colors.length)];
-        newPiece.id = nextId.toString();
-        nextId++;
-        this.pieces.push(newPiece);
-    }
     
+    this.startBoard = function() {
+        for (var i = 0; i < 36; i++) {
+            var newPiece = new GamePiece();
+            newPiece.top = Math.floor(i / 6);
+            newPiece.left = (i % 6);
+            newPiece.color = colors[Math.floor(Math.random() * colors.length)];
+            newPiece.id = nextId.toString();
+            nextId++;
+            this.pieces.push(newPiece);
+        }
+
+        while(this.matchPieces()) {
+            this.clearPieces();
+            this.repopulateBoard(true);
+        }
+
+        turnScore = 0;
+    }
+
+    this.startBoard();
+    this.state = "playing";
+
     this.backDrop = new BackDrop();
     this.backDrop.height = boardTop;
     this.backDrop.width = boardWidth;
-    
+
     this.scoreBoard = new ScoreBoard();
     this.dropTimer = new DropTimer();
 
