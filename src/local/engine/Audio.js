@@ -11,8 +11,14 @@ function Audio() {
     
     this.playSoundAsync = function(soundName) {
         try {
-            var sound = document.getElementById(soundName).cloneNode(true);
+            var sound;
+            if (window.navigator.userAgent.indexOf("Chrome") !== -1) {
+                sound = document.getElementById(soundName).cloneNode(true);
+            } else {
+                sound = document.getElementById(soundName);
+            }
             sound.pause();
+            sound.volume = 0.5;
             sound.currentTime = 0;
             sound.play();
         } catch(e) {}
