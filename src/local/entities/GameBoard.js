@@ -280,7 +280,6 @@ function GameBoard(style) {
                         matched = true;
                         this.pieces[downMatches[k]].matched = true;
                         turnScore += 100;
-                        audio.playSound("scoretally");
                     }
                     turnScore = Math.floor(turnScore * (1 + 0.1 * downMatches.length));
                 }
@@ -289,14 +288,14 @@ function GameBoard(style) {
                         matched = true;
                         this.pieces[rightMatches[m]].matched = true;
                         turnScore += 100;
-                        audio.playSound("scoretally");
-                        turnScore = Math.floor(turnScore * (1 + 0.1 * rightMatches.length));
                     }
+                    turnScore = Math.floor(turnScore * (1 + 0.1 * rightMatches.length));
                 }
             }
         }
         
         if (matched) {
+            audio.playSound("scoretally");
             this.state = "solving";
             this.stateCountdown = stateLength;
         } else {

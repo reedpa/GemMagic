@@ -6,6 +6,10 @@ function Audio() {
     //probably not appropriate for music and the like but good for sounds that can potentially play more frequently
     //than they are long
     this.playSound = function(soundName) {
+        window.setTimeout(this.playSoundAsync, 0, soundName);
+    }
+    
+    this.playSoundAsync = function(soundName) {
         try {
             var sound = document.getElementById(soundName).cloneNode(true);
             sound.pause();
